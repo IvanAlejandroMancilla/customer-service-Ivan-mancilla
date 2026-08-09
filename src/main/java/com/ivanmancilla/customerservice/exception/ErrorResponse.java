@@ -9,18 +9,16 @@ public class ErrorResponse {
     private String error;
     private String message;
     private String path;
-    private String stackTrace;
 
     public ErrorResponse() {
     }
 
-    public ErrorResponse(LocalDateTime timestamp, int status, String error, String message, String path, String stackTrace) {
+    public ErrorResponse(LocalDateTime timestamp, int status, String error, String message, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;
         this.message = message;
         this.path = path;
-        this.stackTrace = stackTrace;
     }
 
     public LocalDateTime getTimestamp() {
@@ -61,13 +59,5 @@ public class ErrorResponse {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public String getStackTrace() {
-        return stackTrace;
-    }
-
-    public void setStackTrace(String stackTrace) {
-        this.stackTrace = stackTrace;
     }
 }
