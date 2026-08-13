@@ -22,7 +22,6 @@ Microservicio de gestión de clientes construido con **Spring Boot 3** y **Java 
 | Spring Cloud Netflix Eureka Client | Descubrimiento de servicios |
 | Spring Cloud Config | Configuración centralizada |
 | Spring Cloud OpenFeign | Comunicación con `product-service` |
-| Lombok | Reducción de boilerplate |
 | Maven | Gestión de dependencias y build |
 
 ## 📁 Estructura del proyecto
@@ -111,7 +110,7 @@ Base path: `/clientes`
 ### Ejemplo — Crear cliente
 
 ```bash
-curl -X POST http://localhost:8080/clientes \
+curl -X POST http://localhost:8081/clientes \
   -H "Content-Type: application/json" \
   -d '{
     "nombre": "Ivan Mancilla",
@@ -124,12 +123,12 @@ curl -X POST http://localhost:8080/clientes \
 ### Ejemplo — Obtener cliente con productos
 
 ```bash
-curl http://localhost:8080/clientes/1/productos
+curl http://localhost:8081/clientes/1/productos
 ```
 
 ## 🧩 Modelo de datos
 
-**Customer (entidad)**
+**Customer (entidad, tabla `customers`)**
 
 | Campo | Tipo | Restricciones |
 |---|---|---|
@@ -138,6 +137,21 @@ curl http://localhost:8080/clientes/1/productos
 | `documento` | String | Requerido, único |
 | `email` | String | Requerido |
 | `saldo` | BigDecimal | — |
+
+**ProductDTO** (recibido desde `product-service` vía Feign, se embebe en `CustomerResponseDTO.productos`)
+
+| Campo | Tipo |
+|---|---|
+| `id` | Long |
+| `clienteId` | Long |
+| `tipo` | String |
+| `nombre` | String |
+| `descripcion` | String |
+| `montoAsociado` | BigDecimal |
+| `tasaInteres` | BigDecimal |
+| `activo` | boolean |
+| `fechaInicio` | LocalDate |
+| `fechaVencimiento` | LocalDate |
 
 ## ⚠️ Manejo de errores
 
